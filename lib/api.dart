@@ -8,10 +8,9 @@ import 'lib/chunk_upload.dart';
 import 'lib/chunk_upload_bytes.dart';
 import 'models/return_models.dart';
 
-class MFileManagerApi {
-  // AppCF cf = AppCF();
-  static final MFileManagerApi request = MFileManagerApi._();
-  MFileManagerApi._();
+class UploaderApi {
+  static final UploaderApi request = UploaderApi._();
+  UploaderApi._();
 
   Future<UploaderRedturnModel> uploadChunk({
     required Function(int) onProgressUpdate,
@@ -21,7 +20,7 @@ class MFileManagerApi {
     Map<String, dynamic> header = const {},
     Map<String, dynamic> content = const {},
   }) async {
-    log('* FILE MANAGER API UPLOAD: uploadChunk | Start: $file');
+    log('* UPLOADER: uploadChunk | Start: $file');
 
     Uploader chunkedUploader = Uploader(
       Dio(
@@ -51,7 +50,7 @@ class MFileManagerApi {
       },
     );
     onComplete();
-    log("* FILE MANAGER API UPLOAD: Chunk Upload Completed! $response");
+    log("* UPLOADER: Chunk Upload Completed! $response");
     return UploaderRedturnModel.fromJson(response?.data);
   }
 
@@ -72,7 +71,7 @@ class MFileManagerApi {
     Map<String, dynamic> header = const {},
     Map<String, dynamic> content = const {},
   }) async {
-    log('* FILE MANAGER API UPLOAD: uploadChunkBytes | Start');
+    log('* UPLOADER: uploadChunkBytes | Start');
 
     if (resumeFileNameTmp == 'N/A') {
       resumeFileNameTmp = generateRandomString(20).toString();
@@ -88,8 +87,6 @@ class MFileManagerApi {
             'Connection': 'keep-alive',
             'Accept-Encoding': 'gzip, deflate, br',
             ...header,
-            // "id-domain": idDomain.toString(),
-            // "api-token": apiToken,
           },
         ),
       ),
@@ -108,7 +105,7 @@ class MFileManagerApi {
       pauseCheck: pauseCheck,
     );
     onComplete();
-    log("* FILE MANAGER API UPLOAD: Chunk Bytes Upload Completed! $response");
+    log("* UPLOADER: Chunk Bytes Upload Completed! $response");
 
     return UploaderRedturnModel.fromJson(response?.data);
   }
