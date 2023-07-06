@@ -1,12 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'dart:math' as math;
 import 'package:dio/dio.dart';
 
-import 'lib/chunk_upload.dart';
-import 'lib/chunk_upload_bytes.dart';
-import 'models/return_models.dart';
+import 'exports.dart';
 
 class UploaderApi {
   static final UploaderApi request = UploaderApi._();
