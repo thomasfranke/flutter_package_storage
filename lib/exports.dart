@@ -1,9 +1,9 @@
 // Helpers:
-export 'lib/chunk_upload.dart';
-export 'lib/chunk_upload_bytes.dart';
+export 'helpers/chunk_upload.dart';
+export 'helpers/chunk_upload_bytes.dart';
 
 // Main:
 export 'api.dart';
 
 // Models:
-export 'models/return_models.dart';
+export 'models/return_model.dart';
