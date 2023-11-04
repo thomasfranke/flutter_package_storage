@@ -7,10 +7,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class UploaderBytes {
+class StorageUploadChunkBytes {
   final Dio _dio;
 
-  UploaderBytes(this._dio);
+  StorageUploadChunkBytes(this._dio);
 
   Future<Response?> upload({
     required Function pauseCheck,

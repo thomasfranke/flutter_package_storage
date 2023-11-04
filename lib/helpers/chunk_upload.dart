@@ -6,10 +6,10 @@ import 'dart:math' as math;
 import 'package:dio/dio.dart';
 import 'package:path/path.dart' as p;
 
-class Uploader {
+class StorageUploadChunkFile {
   final Dio _dio;
 
-  Uploader(this._dio);
+  StorageUploadChunkFile(this._dio);
 
   Future<Response?> upload({
     required String filePath,

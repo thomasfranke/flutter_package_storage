@@ -2,10 +2,10 @@
 
 import 'dart:convert';
 
-List<UploaderRedturnModel> uploaderRedturnModelFromJson(String str) =>
-    List<UploaderRedturnModel>.from(json.decode(str).map((x) => UploaderRedturnModel.fromJson(x)));
+List<StorageModelUpload> storageModelUploadFromJson(String str) =>
+    List<StorageModelUpload>.from(json.decode(str).map((x) => StorageModelUpload.fromJson(x)));
 
-class UploaderRedturnModel {
+class StorageModelUpload {
   final bool mSStatus;
   final bool mRStatus;
   final String mMsg;
@@ -13,7 +13,7 @@ class UploaderRedturnModel {
   final String mFileName;
   final String mUrl;
 
-  UploaderRedturnModel({
+  StorageModelUpload({
     required this.mSStatus,
     required this.mRStatus,
     required this.mMsg,
@@ -22,7 +22,7 @@ class UploaderRedturnModel {
     required this.mUrl,
   });
 
-  factory UploaderRedturnModel.fromJson(Map<String, dynamic> json) => UploaderRedturnModel(
+  factory StorageModelUpload.fromJson(Map<String, dynamic> json) => StorageModelUpload(
         mSStatus: json['s_status'],
         mRStatus: json['r_status'],
         mMsg: json["r_msg"].toString(),

@@ -4,11 +4,11 @@ import 'dart:math' as math;
 import 'package:dio/dio.dart';
 import 'exports.dart';
 
-class UploaderApi {
-  static final UploaderApi request = UploaderApi._();
-  UploaderApi._();
+class StorageApi {
+  static final StorageApi request = StorageApi._();
+  StorageApi._();
 
-  Future<UploaderRedturnModel> uploadChunk({
+  Future<StorageModelUpload> uploadChunk({
     required Function(int) onProgressUpdate,
     required Function onComplete,
     required File file,
@@ -18,7 +18,7 @@ class UploaderApi {
   }) async {
     log('* UPLOADER: uploadChunk | Start: $file');
 
-    Uploader chunkedUploader = Uploader(
+    StorageUploadChunkFile chunkedUploader = StorageUploadChunkFile(
       Dio(
         BaseOptions(
           baseUrl: cfUrlUploadChunk,
@@ -47,7 +47,7 @@ class UploaderApi {
     );
     onComplete();
     log("* UPLOADER: Chunk Upload Completed! $response");
-    return UploaderRedturnModel.fromJson(response?.data);
+    return StorageModelUpload.fromJson(response?.data);
   }
 
   String generateRandomString(int len) {
@@ -55,7 +55,7 @@ class UploaderApi {
     return String.fromCharCodes(List.generate(len, (index) => r.nextInt(33) + 89));
   }
 
-  Future<UploaderRedturnModel> uploadChunkBytes({
+  Future<StorageModelUpload> uploadChunkBytes({
     required Function(int) onProgressUpdate,
     required Function pauseCheck,
     required Function onComplete,
@@ -73,7 +73,7 @@ class UploaderApi {
       resumeFileNameTmp = generateRandomString(20).toString();
     }
 
-    UploaderBytes chunkedUploader = UploaderBytes(
+    StorageUploadChunkBytes chunkedUploader = StorageUploadChunkBytes(
       Dio(
         BaseOptions(
           baseUrl: cfUrlUploadChunkBytes,
@@ -103,6 +103,6 @@ class UploaderApi {
     onComplete();
     log("* UPLOADER: Chunk Bytes Upload Completed! $response");
 
-    return UploaderRedturnModel.fromJson(response?.data);
+    return StorageModelUpload.fromJson(response?.data);
   }
 }

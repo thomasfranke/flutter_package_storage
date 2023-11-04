@@ -8,14 +8,14 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:path/path.dart' as path;
 import '../exports.dart';
 
-class UploadBtnWidget extends StatefulWidget {
+class StorageWidgetsButton extends StatefulWidget {
   final int mServiceId;
   final Function appUploadCompleted;
   final Map<String, dynamic> content;
   final String text;
   final String cfUrlUploadChunkBytes;
 
-  const UploadBtnWidget(
+  const StorageWidgetsButton(
       {Key? key,
       this.mServiceId = 0,
       required this.appUploadCompleted,
@@ -24,10 +24,10 @@ class UploadBtnWidget extends StatefulWidget {
       required this.cfUrlUploadChunkBytes})
       : super(key: key);
   @override
-  State<UploadBtnWidget> createState() => _UploadBtnWidget();
+  State<StorageWidgetsButton> createState() => _StorageWidgetsButton();
 }
 
-class _UploadBtnWidget extends State<UploadBtnWidget> {
+class _StorageWidgetsButton extends State<StorageWidgetsButton> {
   late File file;
   bool isUploading = false;
   bool uploadPause = false;
@@ -53,7 +53,7 @@ class _UploadBtnWidget extends State<UploadBtnWidget> {
 
       Map<String, dynamic> header = {};
 
-      UploaderApi.request.uploadChunkBytes(
+      StorageApi.request.uploadChunkBytes(
         header: header,
         content: widget.content,
         cfUrlUploadChunkBytes: widget.cfUrlUploadChunkBytes,
