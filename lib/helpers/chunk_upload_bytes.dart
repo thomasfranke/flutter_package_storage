@@ -23,18 +23,19 @@ class UploaderBytes {
     int? maxChunkSize,
     Function(double)? onUploadProgress,
     Map<String, dynamic> content = const {},
-  }) =>
-      UploadBytesRequest(_dio,
-              pauseCheck: pauseCheck,
-              fileBytes: fileBytes,
-              fileName: fileName,
-              url: url,
-              content: content,
-              maxChunkSize: maxChunkSize,
-              resumeChunk: resumeChunk,
-              resumeFileNameTmp: resumeFileNameTmp,
-              onUploadProgress: onUploadProgress)
-          .upload();
+  }) {
+    return UploadBytesRequest(_dio,
+            pauseCheck: pauseCheck,
+            fileBytes: fileBytes,
+            fileName: fileName,
+            url: url,
+            content: content,
+            maxChunkSize: maxChunkSize,
+            resumeChunk: resumeChunk,
+            resumeFileNameTmp: resumeFileNameTmp,
+            onUploadProgress: onUploadProgress)
+        .upload();
+  }
 }
 
 class UploadBytesRequest {

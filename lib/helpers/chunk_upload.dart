@@ -62,18 +62,12 @@ class UploadRequest {
     _maxChunkSize = math.min(_fileSize, maxChunkSize ?? _fileSize);
   }
 
-  String generateRandomString(int len) {
-    var r = math.Random();
-    return String.fromCharCodes(List.generate(len, (index) => r.nextInt(33) + 89));
-  }
+  String generateRandomString(int len) => String.fromCharCodes(List.generate(len, (index) => math.Random().nextInt(33) + 89));
 
   Future<Response?> upload() async {
-    log("upload: start");
-
     Response? finalResponse;
     var tmp = generateRandomString(20);
     for (int i = 0; i < _chunksCount; i++) {
-      log('upload: for');
       final start = _getChunkStart(i);
       final end = _getChunkEnd(i);
       final chunkStream = _getChunkStream(start, end);
@@ -104,42 +98,24 @@ class UploadRequest {
     return finalResponse;
   }
 
-  Stream<List<int>> _getChunkStream(int start, int end) {
-    log('_getChunkStream');
-    return _file.openRead(start, end);
-  }
+  Stream<List<int>> _getChunkStream(int start, int end) => _file.openRead(start, end);
 
   // Updating total upload progress
   _updateProgress(int chunkIndex, int chunkCurrent, int chunkTotal) {
-    // log("_updateProgress");
     int totalUploadedSize = (chunkIndex * _maxChunkSize) + chunkCurrent;
     double totalUploadProgress = (totalUploadedSize / _fileSize) * 100;
     onUploadProgress?.call(totalUploadProgress);
   }
 
   // Returning start byte offset of current chunk
-  int _getChunkStart(int chunkIndex) {
-    log("_getChunkStart");
-    return chunkIndex * _maxChunkSize;
-  }
+  int _getChunkStart(int chunkIndex) => chunkIndex * _maxChunkSize;
 
   // Returning end byte offset of current chunk
-  int _getChunkEnd(int chunkIndex) {
-    log("_getChunkEnd");
-    return math.min((chunkIndex + 1) * _maxChunkSize, _fileSize);
-  }
+  int _getChunkEnd(int chunkIndex) => math.min((chunkIndex + 1) * _maxChunkSize, _fileSize);
 
   // Returning a header map object containing Content-Range
-  Map<String, dynamic> _getHeaders(int start, int end) {
-    log("_getHeaders");
-    return {
-      'Content-Range': 'bytes $start-${end - 1}/$_fileSize',
-    };
-  }
+  Map<String, dynamic> _getHeaders(int start, int end) => {'Content-Range': 'bytes $start-${end - 1}/$_fileSize'};
 
   // Returning chunks count based on file size and maximum chunk size
-  int get _chunksCount {
-    log("_chunksCount");
-    return (_fileSize / _maxChunkSize).ceil();
-  }
+  int get _chunksCount => (_fileSize / _maxChunkSize).ceil();
 }
