@@ -1,4 +1,4 @@
-import 'package:api/exports.dart';
+import 'exports.dart';
 
 class StorageEndpoints {
   static ApiModelsEndpoints delete = ApiModelsEndpoints(method: ApiMethods.post, url: "m/filemanager/v1/delete");
